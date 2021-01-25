@@ -82,7 +82,7 @@ if __name__ == "__main__":
     print("Loading train_data..")           
     train_data = GraphDataset(TRAIN_DIR).shuffle()
     print("Loading val_data..") 
-    val_data = GraphDataset(VAL_DIR)
+    val_data = train_data # GraphDataset(VAL_DIR)
     print("DataLoaders..") 
     if small_dataset:
         train_loader = DataLoader(train_data[:100], batch_size=batch_size, shuffle=True)
