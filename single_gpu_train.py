@@ -80,7 +80,7 @@ if __name__ == "__main__":
     # hyper parameters
 
     print("Loading train_data..")           
-    train_data = GraphDataset(TRAIN_DIR).shuffle()
+    train_data = GraphDataset(VAL_DIR).shuffle()
     print("Loading val_data..") 
     val_data = train_data # GraphDataset(VAL_DIR)
     print("DataLoaders..") 
