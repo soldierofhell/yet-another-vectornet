@@ -23,6 +23,7 @@ def masked_softmax(X, valid_len):
         return nn.functional.softmax(X, dim=-1)
     else:
         shape = X.shape
+        print("masked_softmax() shape", shape)
         if valid_len.dim() == 1:
             valid_len = torch.repeat_interleave(
                 valid_len, repeats=shape[1], dim=0)
@@ -30,8 +31,10 @@ def masked_softmax(X, valid_len):
             valid_len = valid_len.reshape(-1)
         # Fill masked elements with a large negative, whose exp is 0
         X = X.reshape(-1, shape[-1])
-        for count, row in enumerate(X):
-            row[int(valid_len[count]):] = -1e6
+        #for count, row in enumerate(X):
+        for count in range(len(X)):
+            r = X[count]
+            r[int(valid_len[count]):] = -1e6 # row
         return nn.functional.softmax(X.reshape(shape), dim=-1)
 
 
