@@ -79,8 +79,11 @@ if __name__ == "__main__":
     torch.manual_seed(SEED)
     # hyper parameters
 
+    print("Loading train_data..")           
     train_data = GraphDataset(TRAIN_DIR).shuffle()
+    print("Loading val_data..") 
     val_data = GraphDataset(VAL_DIR)
+    print("DataLoaders..") 
     if small_dataset:
         train_loader = DataLoader(train_data[:100], batch_size=batch_size, shuffle=True)
         val_loader = DataLoader(val_data[:20], batch_size=batch_size)
@@ -88,6 +91,8 @@ if __name__ == "__main__":
         train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True)
         val_loader = DataLoader(val_data, batch_size=batch_size)
 
+    
+    print("Model..")                               
     model = HGNN(in_channels, out_channels).to(device)
     optimizer = optim.Adam(model.parameters(), lr=lr)
     scheduler = optim.lr_scheduler.StepLR(
