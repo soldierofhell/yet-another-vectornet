@@ -23,7 +23,6 @@ def masked_softmax(X, valid_len):
         return nn.functional.softmax(X, dim=-1)
     else:
         shape = X.shape
-        print("masked_softmax() shape", shape)
         if valid_len.dim() == 1:
             valid_len = torch.repeat_interleave(
                 valid_len, repeats=shape[1], dim=0)
